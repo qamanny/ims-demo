@@ -29,5 +29,10 @@ public class DomainTest {
 		Domain domain = Domain.STOP;
 		assertTrue(domain.getDescription().toLowerCase().contains("close"));
 	}
+	
+	@Test
+	public void printTest() {
+		
+	}
 
 }

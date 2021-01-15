@@ -1,6 +1,7 @@
 package com.qa.ims.controller;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,5 +81,4 @@ public class CustomerControllerTest {
 		customerController.delete();
 		Mockito.verify(customerServices, Mockito.times(1)).delete(1L);
 	}
-	
 }

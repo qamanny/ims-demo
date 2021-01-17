@@ -1,10 +1,13 @@
 package com.qa.persistence.dao;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 import org.junit.Before;
@@ -47,10 +50,13 @@ public class CustomerDaoMysqlTest {
 		String surname = "McArthur";
 		Customer customer = new Customer(id, firstname, surname);
 		Customer savedcustomer = new Customer(id, firstname, surname);
+		ArrayList<Customer> customerRead = new ArrayList<>();
 		customer = customerDaoMysql.create(customer);
+		customerDaoMysql.readAll();
 		assertEquals(customer, savedcustomer);
+		assertNotNull(customerRead);
+		
 		
 	}
-	
 	
 }

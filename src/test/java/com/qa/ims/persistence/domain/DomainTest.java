@@ -6,10 +6,12 @@ import org.junit.Test;
 
 public class DomainTest {
 	
+	@SuppressWarnings("static-access")
 	@Test
 	public void customerTest() {
 		Domain domain = Domain.CUSTOMER;
 		assertTrue(domain.getDescription().toLowerCase().contains("customer"));
+		domain.printDomains();
 	}
 	
 	@Test

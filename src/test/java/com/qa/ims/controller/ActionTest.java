@@ -11,7 +11,7 @@ public class ActionTest {
 	@Test
 	public void createTest() {
 		Action action = Action.CREATE;
-		assertTrue(action.getDescription().toLowerCase().contains("create"));		
+		assertTrue(action.getDescription().toLowerCase().contains("create"));	
 	}
 	
 	@Test

@@ -72,7 +72,7 @@ public class ItemDaoMysql implements Dao<Item> {
 	public Item create(Item item) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("insert into customer(first_name, surname) values('" + item.getItem_name()
+			statement.executeUpdate("insert into item(item_name, item_price) values('" + item.getItem_name()
 					+ "','" + item.getItem_price() + "')");
 			return readLatest();
 		} catch (Exception e) {

@@ -37,7 +37,7 @@ public class ItemController implements CrudController<Item> {
 		LOGGER.info("Please enter the item name");
 		String name = getInput();
 		LOGGER.info("Please enter the item price");
-		double price = Double.valueOf(getInput());
+		Double price = Double.valueOf(getInput());
 		Item item = itemService.create(new Item(name, price));
 		LOGGER.info("Item created");
 		return item;
@@ -50,7 +50,7 @@ public class ItemController implements CrudController<Item> {
 		LOGGER.info("Please enter the item name");
 		String name = getInput();
 		LOGGER.info("Please enter the item's new price");
-		double price = Double.valueOf(getInput());
+		Double price = Double.valueOf(getInput());
 		Item item = itemService.update(new Item(id, name, price));
 		LOGGER.info("Item Updated");
 		return item;

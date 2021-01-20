@@ -4,15 +4,15 @@ public class Item {
 	
 	private Long id;
 	private String item_name;
-	private double item_price;
+	private Double item_price;
 	
-	public Item(String item_name, double item_price) {
+	public Item(String item_name, Double item_price) {
 		super();
 		this.item_name = item_name;
 		this.item_price = item_price;
 	}
 
-	public Item(Long id, String item_name, double item_price) {
+	public Item(Long id, String item_name, Double item_price) {
 		super();
 		this.id = id;
 		this.item_name = item_name;
@@ -35,17 +35,12 @@ public class Item {
 		this.item_name = item_name;
 	}
 
-	public double getItem_price() {
+	public Double getItem_price() {
 		return item_price;
 	}
 
-	public void setItem_price(double item_price) {
+	public void setItem_price(Double item_price) {
 		this.item_price = item_price;
-	}
-
-	@Override
-	public String toString() {
-		return "Item [id=" + id + ", item_name=" + item_name + ", item_price=" + item_price + "]";
 	}
 
 	@Override
@@ -54,10 +49,15 @@ public class Item {
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((item_name == null) ? 0 : item_name.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(item_price);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((item_price == null) ? 0 : item_price.hashCode());
 		return result;
+	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "Item [id=" + id + ", item_name=" + item_name + ", item_price=" + item_price + "]";
 	}
 
 	@Override
@@ -79,9 +79,16 @@ public class Item {
 				return false;
 		} else if (!item_name.equals(other.item_name))
 			return false;
-		if (Double.doubleToLongBits(item_price) != Double.doubleToLongBits(other.item_price))
+		if (item_price == null) {
+			if (other.item_price != null)
+				return false;
+		} else if (!item_price.equals(other.item_price))
 			return false;
 		return true;
 	}
+	
+	
+	
+
 	
 }

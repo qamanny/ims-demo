@@ -18,8 +18,6 @@ public class Order {
 		this.postcode = postcode;
 	}
 	
-	//These are orderline constructors
-	
 	public Order(Long orderId, Long customerId, String address, String postcode, Long stock) {
 		super();
 		this.orderId = orderId;
@@ -28,8 +26,6 @@ public class Order {
 		this.postcode = postcode;
 		this.stock = stock;
 	}
-
-	// Getters and Setters
 	
 	public Long getOrderId() {
 		return orderId;
@@ -71,15 +67,11 @@ public class Order {
 		this.stock = stock;
 	}
 	
-	//To String method
-	
 	@Override
 	public String toString() {
 		return "Order [orderId=" + orderId + ", customerId=" + customerId + ", address=" + address + ", postcode="
 				+ postcode + ", stock=" + stock + "]";
 	}
-
-	//hashCode and equals 
 	
 	@Override
 	public int hashCode() {

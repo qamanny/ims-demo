@@ -1,15 +1,12 @@
 package com.qa.ims.persistence.domain;
 
 public class Order {
-	
+
 	private Long orderId;
 	private Long customerId;
 	private String address;
 	private String postcode;
-	private Long stock;
-	
-	// These are order constructors
-	
+
 	public Order(Long orderId, Long customerId, String address, String postcode) {
 		super();
 		this.orderId = orderId;
@@ -17,16 +14,7 @@ public class Order {
 		this.address = address;
 		this.postcode = postcode;
 	}
-	
-	public Order(Long orderId, Long customerId, String address, String postcode, Long stock) {
-		super();
-		this.orderId = orderId;
-		this.customerId = customerId;
-		this.address = address;
-		this.postcode = postcode;
-		this.stock = stock;
-	}
-	
+
 	public Long getOrderId() {
 		return orderId;
 	}
@@ -59,20 +47,12 @@ public class Order {
 		this.postcode = postcode;
 	}
 
-	public Long getStock() {
-		return stock;
-	}
-
-	public void setStock(Long stock) {
-		this.stock = stock;
-	}
-	
 	@Override
 	public String toString() {
 		return "Order [orderId=" + orderId + ", customerId=" + customerId + ", address=" + address + ", postcode="
-				+ postcode + ", stock=" + stock + "]";
+				+ postcode + "]";
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -81,10 +61,9 @@ public class Order {
 		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
 		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
 		result = prime * result + ((postcode == null) ? 0 : postcode.hashCode());
-		result = prime * result + ((stock == null) ? 0 : stock.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -114,28 +93,7 @@ public class Order {
 				return false;
 		} else if (!postcode.equals(other.postcode))
 			return false;
-		if (stock == null) {
-			if (other.stock != null)
-				return false;
-		} else if (!stock.equals(other.stock))
-			return false;
 		return true;
 	}
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
-	
 
 }

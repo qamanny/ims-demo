@@ -15,6 +15,13 @@ public class Order {
 		this.postcode = postcode;
 	}
 
+	public Order(Long customerId, String address, String postcode) {
+		super();
+		this.customerId = customerId;
+		this.address = address;
+		this.postcode = postcode;
+	}
+
 	public Long getOrderId() {
 		return orderId;
 	}

@@ -40,7 +40,7 @@ public class ItemServicesTest {
 	}
 	
 	@Test
-	public void customerServicesDelete() {
+	public void itemServicesDelete() {
 		itemServices.delete(1L);;
 		Mockito.verify(itemDao, Mockito.times(1)).delete(1L);
 	}

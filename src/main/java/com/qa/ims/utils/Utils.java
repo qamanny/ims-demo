@@ -19,5 +19,11 @@ public class Utils {
 		Scanner scanner = new Scanner(System.in);
 		return scanner.nextDouble();
 	}
+	
+	public static Long getLong() {
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		return scanner.nextLong();
+	}
 
 }

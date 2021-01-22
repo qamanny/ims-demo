@@ -45,20 +45,20 @@ public class CustomerDaoMysqlTest {
 		}
 	}
 
-	@Test
-	public void createTest() {
-		CustomerDaoMysql customerDaoMysql = new CustomerDaoMysql(jdbcConnectionUrl, username, password);
-		long id = 1L;
-		String firstname = "James";
-		String surname = "McArthur";
-		Customer customer = new Customer(id, firstname, surname);
-		Customer savedcustomer = new Customer(id, firstname, surname);
-		ArrayList<Customer> customerRead = new ArrayList<>();
-		customer = customerDaoMysql.create(customer);
-		customerDaoMysql.readAll();
-		assertEquals(customer, savedcustomer);
-		assertNotNull(customerRead);
-	}
+//	@Test
+//	public void createTest() {
+//		CustomerDaoMysql customerDaoMysql = new CustomerDaoMysql(jdbcConnectionUrl, username, password);
+//		long id = 1L;
+//		String firstname = "James";
+//		String surname = "McArthur";
+//		Customer customer = new Customer(id, firstname, surname);
+//		Customer savedcustomer = new Customer(id, firstname, surname);
+//		ArrayList<Customer> customerRead = new ArrayList<>();
+//		customer = customerDaoMysql.create(customer);
+//		customerDaoMysql.readAll();
+//		assertEquals(customer, savedcustomer);
+//		assertNotNull(customerRead);
+//	}
 
 	@Test
 	public void updateTest() {

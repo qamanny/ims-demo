@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderDaoMysql.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">qamanny-ims</a> &gt; <a href="index.source.html" class="el_package">com.qa.ims.persistence.dao</a> &gt; <span class="el_source">OrderDaoMysql.java</span></div><h1>OrderDaoMysql.java</h1><pre class="source lang-java linenums">package com.qa.ims.persistence.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.qa.ims.persistence.domain.Order;
+
+public class OrderDaoMysql implements Dao&lt;Order&gt; {
+
+<span class="nc" id="L17">	public static final Logger LOGGER = Logger.getLogger(OrderDaoMysql.class);</span>
+
+	private String jdbcConnectionUrl;
+	private String username;
+	private String password;
+
+<span class="nc" id="L23">	public OrderDaoMysql(String username, String password) {</span>
+<span class="nc" id="L24">		this.jdbcConnectionUrl = &quot;jdbc:mysql://34.89.103.147/ims&quot;;</span>
+<span class="nc" id="L25">		this.username = username;</span>
+<span class="nc" id="L26">		this.password = password;</span>
+<span class="nc" id="L27">	}</span>
+
+	public OrderDaoMysql(String jdbcConnectionUrl, String username, String password) {
+<span class="nc" id="L30">		super();</span>
+<span class="nc" id="L31">		this.jdbcConnectionUrl = jdbcConnectionUrl;</span>
+<span class="nc" id="L32">		this.username = username;</span>
+<span class="nc" id="L33">		this.password = password;</span>
+
+<span class="nc" id="L35">	}</span>
+
+	Order orderFromResultSet(ResultSet resultSet) throws SQLException {
+<span class="nc" id="L38">		Long orderId = resultSet.getLong(&quot;orderId&quot;);</span>
+<span class="nc" id="L39">		Long customerId = resultSet.getLong(&quot;customerId&quot;);</span>
+<span class="nc" id="L40">		String address = resultSet.getString(&quot;address&quot;);</span>
+<span class="nc" id="L41">		String postcode = resultSet.getString(&quot;postcode&quot;);</span>
+<span class="nc" id="L42">		return new Order(orderId, customerId, address, postcode);</span>
+
+	}
+
+	@Override
+	public List&lt;Order&gt; readAll() {
+<span class="nc" id="L48">		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);</span>
+<span class="nc" id="L49">				Statement statement = connection.createStatement();</span>
+<span class="nc" id="L50">				ResultSet resultSet = statement.executeQuery(&quot;SELECT * FROM order&quot;);) {</span>
+<span class="nc" id="L51">			ArrayList&lt;Order&gt; orders = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">			while (resultSet.next()) {</span>
+<span class="nc" id="L53">				orders.add(orderFromResultSet(resultSet));</span>
+			}
+<span class="nc" id="L55">			return orders;</span>
+<span class="nc" id="L56">		} catch (SQLException e) {</span>
+<span class="nc" id="L57">			LOGGER.debug(e.getStackTrace());</span>
+<span class="nc" id="L58">			LOGGER.error(e.getStackTrace());</span>
+		}
+<span class="nc" id="L60">		return new ArrayList&lt;&gt;();</span>
+	}
+
+	public Order readLatest() {
+<span class="nc" id="L64">		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);</span>
+<span class="nc" id="L65">				Statement statement = connection.createStatement();</span>
+<span class="nc" id="L66">				ResultSet resultSet = statement.executeQuery(&quot;select * from order ORDER BY orderId desc limit 1;&quot;);) {</span>
+<span class="nc" id="L67">			resultSet.next();</span>
+<span class="nc" id="L68">			return orderFromResultSet(resultSet);</span>
+<span class="nc" id="L69">		} catch (Exception e) {</span>
+<span class="nc" id="L70">			LOGGER.debug(e.getStackTrace());</span>
+<span class="nc" id="L71">			LOGGER.error(e.getStackTrace());</span>
+		}
+<span class="nc" id="L73">		return null;</span>
+	}
+
+	@Override
+
+	public Order create(Order order) {
+<span class="nc" id="L79">		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);</span>
+<span class="nc" id="L80">				Statement statement1 = connection.createStatement();) {</span>
+<span class="nc" id="L81">			statement1.executeUpdate(&quot;INSERT INTO orders(customerId, address, postcode) VALUES('&quot;</span>
+<span class="nc" id="L82">					+ order.getCustomerId() + &quot;', '&quot; + order.getAddress() + &quot;', '&quot; + order.getPostcode() + &quot;')&quot;);</span>
+<span class="nc" id="L83">			return readLatest();</span>
+<span class="nc" id="L84">		} catch (Exception e) {</span>
+<span class="nc" id="L85">			LOGGER.debug(e.getStackTrace());</span>
+<span class="nc" id="L86">			LOGGER.error(e.getStackTrace());</span>
+		}
+<span class="nc" id="L88">		return null;</span>
+	}
+
+	public Order readOrder(Long orderId) {
+
+<span class="nc" id="L93">		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);</span>
+<span class="nc" id="L94">				Statement statement = connection.createStatement();</span>
+<span class="nc" id="L95">				ResultSet resultSet = statement.executeQuery(&quot;SELECT * FROM order WHERE orderID=&quot; + orderId);) {</span>
+<span class="nc" id="L96">			resultSet.next();</span>
+<span class="nc" id="L97">			return orderFromResultSet(resultSet);</span>
+<span class="nc" id="L98">		} catch (Exception e) {</span>
+<span class="nc" id="L99">			LOGGER.debug(e.getStackTrace());</span>
+<span class="nc" id="L100">			LOGGER.error(e.getStackTrace());</span>
+		}
+<span class="nc" id="L102">		return null;</span>
+
+	}
+
+	@Override
+	public Order update(Order order) {
+<span class="nc" id="L108">		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);</span>
+<span class="nc" id="L109">				Statement statement = connection.createStatement();) {</span>
+<span class="nc" id="L110">			statement.executeUpdate(</span>
+<span class="nc" id="L111">					&quot;update orders set customerId = &quot; + order.getCustomerId() + &quot;, address = &quot; + order.getAddress()</span>
+<span class="nc" id="L112">							+ &quot;, postcode =&quot; + order.getPostcode() + &quot; where orderID =&quot; + order.getOrderId());</span>
+<span class="nc" id="L113">			return readOrder(order.getOrderId());</span>
+<span class="nc" id="L114">		} catch (Exception e) {</span>
+<span class="nc" id="L115">			LOGGER.debug(e.getStackTrace());</span>
+<span class="nc" id="L116">			LOGGER.info(e.getStackTrace());</span>
+		}
+<span class="nc" id="L118">		return null;</span>
+	}
+
+	@Override
+	public void delete(long id) {
+<span class="nc" id="L123">		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);</span>
+<span class="nc" id="L124">				Statement statement = connection.createStatement();) {</span>
+<span class="nc" id="L125">			statement.executeUpdate(&quot;DELETE FROM order WHERE orderId = '&quot; + id + &quot;';&quot;);</span>
+<span class="nc" id="L126">		} catch (Exception e) {</span>
+<span class="nc" id="L127">			LOGGER.debug(e.getStackTrace());</span>
+<span class="nc" id="L128">			LOGGER.debug(e.getStackTrace());</span>
+<span class="nc" id="L129">		}</span>
+
+<span class="nc" id="L131">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

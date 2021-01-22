@@ -1,0 +1,17 @@
+com\qa\ims\services\ItemServicesTest.class
+com\qa\ims\services\CustomerServicesTest.class
+com\qa\ims\persistence\domain\CustomerTest.class
+com\qa\persistence\dao\CustomerDaoMysqlTest.class
+com\qa\persistence\dao\ItemDaoMysqlTest.class
+com\qa\ims\services\OrderServicesTest.class
+com\qa\ims\persistence\domain\ItemTest.class
+com\qa\ims\controller\OrderControllerTest.class
+com\qa\ims\persistence\domain\DomainTest.class
+com\qa\ims\controller\CustomerControllerTest.class
+com\qa\persistence\dao\OrderDaoMysqlTest.class
+com\qa\ims\controller\ItemControllerTest.class
+com\qa\ims\persistence\domain\OrderTest.class
+com\qa\ims\persistence\domain\OrderlineTest.class
+com\qa\persistence\dao\Dao.class
+com\qa\ims\controller\ActionTest.class
+com\qa\ims\services\OrderServicesTest$orderServicesTest.class

@@ -1,8 +1,12 @@
 package com.qa.ims.controller;
 
-import java.util.List;
 
-public class OrderController {
+public class OrderController implements CrudController<Order> {
+	
+	public static final Logger LOGGER = Logger.getLogger(OrderController.class);
+	
+	private CrudServices<Order> orderService;
+	private CrudServices<Orderline> orderlineService;
 	
 
 

@@ -35,10 +35,10 @@ public class ItemController implements CrudController<Item> {
 	@Override
 	public Item create() {
 		LOGGER.info("Please enter the item name");
-		String name = getInput();
+		String item_name = getInput();
 		LOGGER.info("Please enter the item price");
-		Double price = Double.valueOf(getInput());
-		Item item = itemService.create(new Item(name, price));
+		Double item_price = Double.valueOf(getInput());
+		Item item = itemService.create(new Item(item_name, item_price));
 		LOGGER.info("Item created");
 		return item;
 	}
@@ -48,10 +48,10 @@ public class ItemController implements CrudController<Item> {
 		LOGGER.info("Please enter the id of the item you would like to update");
 		Long id = Long.valueOf(getInput());
 		LOGGER.info("Please enter the item name");
-		String name = getInput();
+		String item_name = getInput();
 		LOGGER.info("Please enter the item's new price");
-		Double price = Double.valueOf(getInput());
-		Item item = itemService.update(new Item(id, name, price));
+		Double item_price = Double.valueOf(getInput());
+		Item item = itemService.update(new Item(id, item_name, item_price));
 		LOGGER.info("Item Updated");
 		return item;
 	}

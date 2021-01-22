@@ -12,12 +12,7 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.Spy;
-import org.mockito.junit.MockitoJUnitRunner;
+
 
 import com.qa.ims.Ims;
 import com.qa.ims.persistence.dao.CustomerDaoMysql;
@@ -28,7 +23,6 @@ public class CustomerDaoMysqlTest {
 
 	public static final Logger LOGGER = Logger.getLogger(CustomerDaoMysql.class);
 
-	private static final long NULL = 0;
 
 	private static String jdbcConnectionUrl = "jdbc:mysql://localhost:3306/ims_test";
 	private static String username = "root";

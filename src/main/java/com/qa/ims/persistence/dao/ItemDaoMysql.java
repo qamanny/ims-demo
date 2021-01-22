@@ -100,8 +100,8 @@ public class ItemDaoMysql implements Dao<Item> {
 	public Item update(Item item) {
 		try (Connection connection = DriverManager.getConnection(jdbcConnectionUrl, username, password);
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("update item set item_name ='" + item.getItem_name() + "', price ='"
-					+ item.getItem_price() + "' where id =" + item.getId());
+			statement.executeUpdate("update item set item_name ='" + item.getItem_name() + "', item_price ='"
+					+ item.getItem_price()+ "' where id =" + item.getId());
 			return readItem(item.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e.getStackTrace());

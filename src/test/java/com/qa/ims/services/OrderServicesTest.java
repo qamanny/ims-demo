@@ -23,7 +23,7 @@ public class OrderServicesTest {
 		
 		@Test
 		public void orderServicesCreate() {
-			Order order = new Order(1L, "29 Fifth Street", "CF4 1LB");
+			Order order = new Order(1L, 1L, "29 Fifth Street", "CF24 9FB");
 			orderServices.create(order);
 			Mockito.verify(orderDao, Mockito.times(1)).create(order);
 		}
@@ -36,7 +36,7 @@ public class OrderServicesTest {
 		
 		@Test
 		public void orderServicesUpdate() {
-			Order order = new Order(1L, 1L, "29 Fifth Street", "CF4 1LB");
+			Order order = new Order(2L, 2L, "30 Fifth Street", "CF25 9FC");
 			orderServices.update(order);
 			Mockito.verify(orderDao, Mockito.times(1)).update(order);
 		}
